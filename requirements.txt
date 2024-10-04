@@ -1,0 +1,11 @@
+PyPDF2
+langchain
+langchain-google-genai
+streamlit
+google-generativeai
+langchain-community
+faiss-cpu
+python-dotenv
+colorama
+langsmith
+

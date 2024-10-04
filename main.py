@@ -12,7 +12,7 @@ from langchain.chains import SequentialChain
 from dotenv import load_dotenv
 import csv
 from datetime import datetime
-
+import langsmith
 from colorama import init, Fore, Style
 
 

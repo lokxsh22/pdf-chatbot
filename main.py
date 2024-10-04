@@ -188,12 +188,17 @@ def user_input(user_question):
         "question": user_question
     })
 
-    # Extract reasoning steps and final answer
-    reasoning_steps = response['output_text'].split("Final Answer:")[0].strip()  # Get the reasoning part
-    final_answer = response['output_text'].split("Final Answer:")[1].strip()  # Get the final answer
-
     # Initialize colorama for coloring output
     init(autoreset=True)
+
+    # Ensure the output_text contains "Final Answer:"
+    output_text = response.get('output_text', '')
+    if "Final Answer:" in output_text:
+        reasoning_steps = output_text.split("Final Answer:")[0].strip()  # Get the reasoning part
+        final_answer = output_text.split("Final Answer:")[1].strip()  # Get the final answer
+    else:
+        reasoning_steps = output_text.strip()  # If not present, use the whole output as reasoning
+        final_answer = "No final answer provided."  # Default message for final answer
 
     # Print reasoning steps in color
     print(f"{Fore.BLUE}Reasoning Steps:{Style.RESET_ALL}")
@@ -213,6 +218,7 @@ def user_input(user_question):
     print(f"{Fore.RED}Final Answer: {final_answer}{Style.RESET_ALL}")
 
     return final_answer
+
 
 def save_user_info(name, phone, email):
     file_exists = os.path.isfile('user_info.csv')
